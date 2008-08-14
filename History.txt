@@ -1,3 +1,7 @@
+== 0.2.6 / 2008-08-14
+
+* Fix the problem that hang up when required (OS: MacOSX-Leopard)
+
 == 0.2.5 / 2008-06-07
 
 * Created homepage on Rubyforge.
