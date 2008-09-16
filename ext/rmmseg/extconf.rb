@@ -10,7 +10,7 @@ CONFIG['LDSHARED'] = CONFIG['LDSHARED'].sub(/^\$\(CC\)/, 'g++')
 # end
 
 if RUBY_PLATFORM =~ /darwin/
-  CONFIG['LDShARED'] = 'g++ -dynamiclib -single_module -flat_namespace -undefined suppress'
+  CONFIG['LDSHARED'] = 'g++ -dynamiclib -single_module -flat_namespace -undefined suppress'
 end
 
 $objs = ['algor.o', 'dict.o', 'memory.o', 'rmmseg.o']
