@@ -1,3 +1,7 @@
+== 0.2.7 / 2008-09-17
+
+* Fix various stupid bugs (typo) that cause problems under MacOSX.
+
 == 0.2.6 / 2008-08-14
 
 * Fix the problem that hang up when required (OS: MacOSX-Leopard)
