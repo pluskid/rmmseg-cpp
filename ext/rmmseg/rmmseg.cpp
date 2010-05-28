@@ -36,7 +36,7 @@ extern "C" {
      */ 
     static VALUE dic_load_chars(VALUE mod, VALUE path)
     {
-        if (rmmseg::dict::load_chars(RSTRING(path)->ptr))
+        if (rmmseg::dict::load_chars(RSTRING_PTR(path)))
             return Qtrue;
         return Qfalse;
     }
@@ -51,7 +51,7 @@ extern "C" {
      */ 
     static VALUE dic_load_words(VALUE mod, VALUE path)
     {
-        if (rmmseg::dict::load_words(RSTRING(path)->ptr))
+        if (rmmseg::dict::load_words(RSTRING_PTR(path)))
             return Qtrue;
         return Qfalse;
     }
@@ -70,8 +70,8 @@ extern "C" {
      */ 
     static VALUE dic_add(VALUE mod, VALUE word, VALUE len, VALUE freq)
     {
-        const char *str = RSTRING(word)->ptr;
-        int nbytes = RSTRING(word)->len;
+        const char *str = RSTRING_PTR(word);
+        int nbytes = RSTRING_LEN(word);
         rmmseg::Word *w = rmmseg::make_word(str, FIX2INT(len), FIX2INT(freq), nbytes);
         rmmseg::dict::add(w);
         return Qnil;
@@ -88,8 +88,8 @@ extern "C" {
      */ 
     static VALUE dic_has_word(VALUE mod, VALUE word)
     {
-        const char *str = RSTRING(word)->ptr;
-        int nbytes = RSTRING(word)->len;
+        const char *str = RSTRING_PTR(word);
+        int nbytes = RSTRING_LEN(word);
         if (rmmseg::dict::get(str, nbytes) != NULL)
             return Qtrue;
         return Qfalse;
@@ -207,8 +207,8 @@ extern "C" {
         void *mem;
         algor->text = text;
         mem = malloc(sizeof(rmmseg::Algorithm));
-        algor->algor = new(mem) rmmseg::Algorithm(RSTRING(text)->ptr,
-                                                  RSTRING(text)->len);
+        algor->algor = new(mem) rmmseg::Algorithm(RSTRING_PTR(text),
+                                                  RSTRING_LEN(text));
 
         return Data_Wrap_Struct(klass,
                                 (RUBY_DATA_FUNC)algor_mark,
@@ -231,7 +231,7 @@ extern "C" {
 
         if (tk.length == 0)
             return Qnil;
-        return tk_create(RSTRING(algor->text)->ptr, tk);
+        return tk_create(RSTRING_PTR(algor->text), tk);
     }
 
 
