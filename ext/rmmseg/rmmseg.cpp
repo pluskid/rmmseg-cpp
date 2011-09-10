@@ -162,16 +162,17 @@ extern "C" {
         int start = t.text-base;
 
         // This is necessary, see
-        // http://pluskid.lifegoo.com/?p=348
+        // http://lifegoo.pluskid.org/?p=348
         volatile VALUE text = rb_str_new(t.text, t.length);
         tk->text = text;
 
         tk->start = INT2FIX(start);
         tk->end = INT2FIX(start + t.length);
-        return Data_Wrap_Struct(cToken,
+        volatile VALUE tok = Data_Wrap_Struct(cToken,
                                 (RUBY_DATA_FUNC)tk_mark,
                                 (RUBY_DATA_FUNC)tk_free,
                                 tk);
+        return tok;
     }
 
     /*********************
@@ -231,7 +232,8 @@ extern "C" {
 
         if (tk.length == 0)
             return Qnil;
-        return tk_create(RSTRING_PTR(algor->text), tk);
+        volatile VALUE rtk = tk_create(RSTRING_PTR(algor->text), tk);
+        return rtk;
     }
 
 

@@ -43,6 +43,17 @@ init by loading the dictionaries:
 
   RMMSeg::Dictionary.load_dictionaries
 
+If you want to add customized dictionaries, append them to 
++RMMSeg::Dictionary.dictionaries+ before calling +load_dictionaries+.
+The formats of chars.dic and  words.dic are NOT the same:
+
+* For chars.dic, each line contains freq, a space, and then the character
+* For words.dic, each line contains length, a space, and then the word.
+
+Note length mean the length of the word, i.e. the number of characters
+of the word, not number of bytes. WARNING: there should be a newline at
+the end of every dictionary file.
+
 Then create a +Algorithm+ object and call +next_token+ until got a
 +nil+:
 

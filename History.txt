@@ -1,3 +1,7 @@
+== 0.2.8 / 2010-03-22
+
+* Minor release, fixed building bugs in Ruby 1.9.
+
 == 0.2.7 / 2008-09-17
 
 * Fix various stupid bugs (typo) that cause problems under MacOSX.

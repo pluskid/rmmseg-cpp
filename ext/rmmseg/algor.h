@@ -22,33 +22,32 @@ namespace rmmseg
     {
     public:
         Algorithm(const char *text, int length)
-            :m_chunks_size(0), m_text(text), m_pos(0),
+            :m_text(text), m_pos(0),
             m_text_length(length),
             m_tmp_words_i(0),
             m_match_cache_i(0)
-            {
-                for (int i = 0; i < match_cache_size; ++i)
-                    m_match_cache[i].first = -1;
-            }
+        {
+            for (int i = 0; i < match_cache_size; ++i)
+                m_match_cache[i].first = -1;
+        }
 
         Token next_token();
+
+        const char *get_text() const
+        {
+            return m_text;
+        }
 
     private:
         Token get_basic_latin_word();
         Token get_cjk_word(int);
-
-        static const int MAX_WORD_LENGTH = 4;
-        static const int MAX_N_CHUNKS = \
-            MAX_WORD_LENGTH*MAX_WORD_LENGTH*MAX_WORD_LENGTH;
         
-        void create_chunks();
+        std::vector<Chunk> create_chunks();
         int next_word();
         int next_char();
         std::vector<Word *> find_match_words();
-        int max_word_length() { return MAX_WORD_LENGTH; }
+        int max_word_length() { return 4; }
 
-        Chunk m_chunks[MAX_N_CHUNKS];
-        int m_chunks_size;
         
         const char *m_text;
         int m_pos;
@@ -65,7 +64,7 @@ namespace rmmseg
             return &m_tmp_words[m_tmp_words_i++];
         }
 
-        /* related to max_word_length and match_words_cache_size */
+        /* related to max_word_length and match_cache_size */
         static const int max_tmp_words = 64;
         Word m_tmp_words[max_tmp_words];
         int m_tmp_words_i;
