@@ -1,7 +1,7 @@
 <%# -*- mode: text; coding: utf-8 -*- %>
 <%
   $title = "rmmseg-cpp Homepage"
-  $authors = { 'pluskid' => 'http://pluskid.lifegoo.com' }
+  $authors = { 'pluskid' => 'http://blog.pluskid.org' }
 %>
 
 <% chapter "Introduction" do %> 
@@ -110,7 +110,24 @@
       RMMSeg::Dictionary.load_dictionaries
       </code>
 
-      Now rmmseg-cpp will be ready to do segmenting.    
+      Now rmmseg-cpp will be ready to do segmenting. If you want to load your own customized
+      dictionaries, please customize <tt>RMMSeg::Dictionary.dictionaries</tt> before calling
+      <tt>load_dictionaries</tt>. e.g.
+
+      <code>
+      RMMSeg::Dictionary.dictionaries = [[:chars, "my_chars.dic"],
+                                         [:words, "my_words.dic"],
+                                         [:words, "my_words2.dic"]]
+      </code>
+
+      The basic format for char-dictionary and word-dictionary are similar. For each line, 
+      there is a number, then *a* space, then the string. Note there *SHOULD* be a newline
+      at the end of the dictionary file. And the number in char-dictionary and word-dictionary
+      has different meaning.
+
+      In char-dictionary, the number means the frequency of the character. In word-dictionary,
+      the number mean the number of characters in the word. Note that this is NOT the number
+      of *bytes* in the word.
 
     <% end %>
 
@@ -139,7 +156,7 @@
       of running that example is shown in <%= xref "Ferret Example Screenshot" %>.
   
       <% figure "Ferret Example Screenshot" do %>
-        !http://pluskid.lifegoo.com/wp-content/uploads/2008/02/rmmseg.png!
+        !http://lifegoo.pluskid.org/wp-content/uploads/2008/02/rmmseg.png!
       <% end %>
     
     <% end %>
@@ -174,6 +191,6 @@
 <% chapter "Resources" do %>
   * "Project Home":http://rubyforge.org/projects/rmmseg-cpp/: The Project page at RubyForge.
   * "RDoc of rmmseg-cpp":http://rmmseg-cpp.rubyforge.org/rdoc/index.html: The auto generated rdoc of RMMSeg.
-  * "Free Mind":http://pluskid.lifegoo.com/: The author's blog.
+  * "Free Mind":http://blog.pluskid.org/: The author's blog.
   * "Author's Email":mailto:pluskid@gmail.com: Contact me if you have any problem.
 <% end %>
