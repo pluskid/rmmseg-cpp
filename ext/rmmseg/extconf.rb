@@ -9,7 +9,7 @@ CONFIG['LDSHARED'] = CONFIG['LDSHARED'].sub(/^\$\(CC\)/, 'g++')
 #   CONFIG['LDSHARED'] = 'g++ -shared'  
 # end
 
-if RUBY_PLATFORM =~ /darwin/
+if RUBY_PLATFORM =~ /darwin/ and `which brew`.empty?
   CONFIG['LDSHARED'] = 'g++ -dynamiclib -single_module -flat_namespace -undefined suppress'
 end
 
