@@ -92,7 +92,11 @@ namespace :gem do
 
   desc 'Install the gem'
   task :install => [:clobber, 'gem:package'] do
-    sh "#{SUDO} #{GEM} install --local pkg/#{PROJ.gem._spec.full_name}"
+    if `which brew`.empty?
+      sh "#{SUDO} #{GEM} install --local pkg/#{PROJ.gem._spec.full_name}"
+    else
+      sh "#{GEM} install --local pkg/#{PROJ.gem._spec.full_name}.gem"
+    end
 
     # use this version of the command for rubygems > 1.0.0
     #sh "#{SUDO} #{GEM} install --no-update-sources pkg/#{PROJ.gem._spec.full_name}"
