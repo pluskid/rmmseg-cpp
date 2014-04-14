@@ -1,7 +1,7 @@
 # $Id$
 
-require 'rake/gempackagetask'
-
+require 'rubygems/package_task'
+require 'rubygems'
 namespace :gem do
 
   PROJ.gem._spec = Gem::Specification.new do |s|
@@ -83,7 +83,7 @@ namespace :gem do
 
   file "#{pkg.package_dir}/#{gem_file}" => [pkg.package_dir] + PROJ.gem._spec.files do
     when_writing("Creating GEM") {
-      Gem::Builder.new(PROJ.gem._spec).build
+      Gem::Package.build(PROJ.gem._spec)
       verbose(true) {
         mv gem_file, "#{pkg.package_dir}/#{gem_file}"
       }
