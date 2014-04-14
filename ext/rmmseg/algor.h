@@ -41,14 +41,13 @@ namespace rmmseg
     private:
         Token get_basic_latin_word();
         Token get_cjk_word(int);
-        
+
         std::vector<Chunk> create_chunks();
         int next_word();
         int next_char();
         std::vector<Word *> find_match_words();
-        int max_word_length() { return 4; }
+        int max_word_length() { return 20; }
 
-        
         const char *m_text;
         int m_pos;
         int m_text_length;
@@ -65,7 +64,7 @@ namespace rmmseg
         }
 
         /* related to max_word_length and match_cache_size */
-        static const int max_tmp_words = 64;
+        static const int max_tmp_words = 512;
         Word m_tmp_words[max_tmp_words];
         int m_tmp_words_i;
 
