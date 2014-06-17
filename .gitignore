@@ -2,7 +2,6 @@
 *.so
 a.out
 Makefile
-ext/rmmseg
 doc
 *.gem
 !ext/rmmseg/*.{cpp,h}
