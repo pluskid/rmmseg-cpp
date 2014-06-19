@@ -9,8 +9,8 @@
 #  - number and string should be separated by ONE space
 #  - there should be a newline at the end of file
 
-$KCODE='u'
-require 'jcode'
+# $KCODE='u'
+# require 'jcode'
 
 def usage(msg=nil)
   puts "***ERROR: #{msg}\n\n" if msg
@@ -66,7 +66,7 @@ def read_RMMSeg_words
   File.readlines(ARGV[2]).map do |line|
     line.chomp!
     if !line.empty?
-      [line.jlength, line]
+      [line.size, line]
     else
       [nil, nil]
     end
