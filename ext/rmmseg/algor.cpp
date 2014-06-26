@@ -162,16 +162,47 @@ namespace rmmseg
     {
         // ONLY for UTF-8
         unsigned char ch = m_text[m_pos];
-        if (ch >= 0xC0 && ch <= 0xDF)
-        {
-            return min(2, m_text_length-m_pos);
-        }
-        if (ch >= 0xE0 && ch <= 0xEF)
-        {
-            return min(3, m_text_length-m_pos);
-        }
-        return 1;
+
+        if (  ch>>7 == 0      )
+                return 1;
+        if ( ch>>5  ==  0x6 )
+                return 2;
+        else if (ch>> 4 == 0xe)
+                return 3;
+        else if (ch>> 3 == 0x1e )
+                return 4;
+        else
+                return -1;
+        // if (ch >= 0xC0 && ch <= 0xDF)
+        // {
+        //     return 1;
+        // }
+        // if (ch >= 0x60 && ch <= 0xEF)
+        // {
+        //     return min(2, m_text_length-m_pos);
+        // }
+        // if (ch >= 0xE0 && ch <= 0xEF)
+        // {
+        //     return min(3, m_text_length-m_pos);
+        // }
+        // return 1;
     }
+
+    // int Algorithm::next_char(const char * p)
+    // {
+    //     uint8 one = (unsigned char)(*p);
+
+    //     if (  one>>7 == 0      )
+    //             return 1;
+    //     if ( one>>5  ==  0x6 )
+    //             return 2;
+    //     else if (one >> 4 == 0xe)
+    //             return 3;
+    //     else if (one >> 3 == 0x1e )
+    //             return 4;
+    //     else
+    //             return -1;
+    // }
 
     vector<Word *> Algorithm::find_match_words()
     {
