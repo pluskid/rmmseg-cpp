@@ -1,7 +1,7 @@
 # -*- Ruby -*-
-
+require 'rake/extensiontask'
 load 'tasks/setup.rb'
-
+Rake::ExtensionTask.new('rmmseg')
 ensure_in_path 'lib'
 require 'rmmseg'
 
