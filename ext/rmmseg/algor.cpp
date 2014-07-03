@@ -14,13 +14,13 @@ namespace rmmseg
         {
             if (m_pos >= m_text_length)
                 return Token(NULL, 0);
-     
+
             Token tk(NULL, 0);
             int len = next_char();
-            if (len == 1)
-                tk = get_basic_latin_word();
-            else
-                tk = get_cjk_word(len);
+            // if (len == 1)
+            //     tk = get_basic_latin_word();
+            // else
+            tk = get_cjk_word(len);
             if (tk.length > 0)
                 return tk;
         }
@@ -89,7 +89,7 @@ namespace rmmseg
         m_pos += chunks[0].words[0]->nbytes;
         return token;
     }
-    
+
     vector<Chunk> Algorithm::create_chunks()
     {
         vector<Chunk> chunks;
@@ -220,7 +220,7 @@ namespace rmmseg
             if (n >= max_word_length())
                 break;
             len = next_char();
-            if (len <= 1)
+            if (len < 1)
                 break;
 
             m_pos += len;
@@ -232,7 +232,7 @@ namespace rmmseg
         }
 
         m_pos = orig_pos;
-        
+
         if (words.empty())
         {
             word = get_tmp_word();
