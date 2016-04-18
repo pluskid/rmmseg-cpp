@@ -1,6 +1,9 @@
 rmmseg-cpp
     by pluskid
     http://rmmseg-cpp.rubyforge.org
+    
+Please refer to rmmseg-cpp-new (https://github.com/Eric-Guo/rmmseg-cpp-new) 
+for an updated build with modern ruby FFI, and also better Windows support.
 
 == DESCRIPTION:
 
